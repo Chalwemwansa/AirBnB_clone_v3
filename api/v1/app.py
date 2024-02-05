@@ -39,12 +39,6 @@ def err_handler(error):
 if __name__ == "__main__":
     """the function will only execute if the module is run from here
         and not if imported"""
-    if getenv("HBNB_API_HOST") is None:
-        host = '0.0.0.0'
-    else:
-        host = getenv("HBNB_API_HOST")
-    if getenv("HBNB_API_PORT") is None:
-        port = 5000
-    else:
-        port = getenv("HBNB_API_PORT")
-    app.run(host=host, port=port, threaded=True)
+    HOST = getenv("HBNB_API_HOST", '0.0.0.0')
+    PORT = int(getenv("HBNB_API_PORT", 5000))
+    app.run(host=HOST, port=PORT, threaded=True)
