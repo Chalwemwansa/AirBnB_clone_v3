@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""the file that contains the blueprints to be used in the app"""
+"""the file that contains the blueprints to be used in the app
+    the ones for status and count"""
 from api.v1.views import app_views
 from models import storage
 from flask import jsonify
@@ -8,7 +9,8 @@ from flask import jsonify
 @app_views.route('/status', strict_slashes=False,
                  methods=['GET'])
 def status():
-    """returns the status of the server"""
+    """returns the status of the server in json format
+        like {status: OK}"""
     dict = {}
     dict['status'] = 'OK'
     return jsonify(dict), 200
@@ -17,7 +19,8 @@ def status():
 @app_views.route('/stats', strict_slashes=False,
                  methods=['GET'])
 def count():
-    """returns the count of the classes in models"""
+    """returns the count of the classes in models in json format
+        the returned value is a list of dictionaries"""
     from models.amenity import Amenity
     from models.base_model import BaseModel
     from models.city import City

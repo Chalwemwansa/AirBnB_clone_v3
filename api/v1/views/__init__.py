@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""the __init__ file containing imports"""
+"""the __init__ file containing imports and the app_views
+    bllueprint to be used in other views"""
 from flask import Blueprint
 
 
