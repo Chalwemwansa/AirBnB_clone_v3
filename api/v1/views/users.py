@@ -4,13 +4,13 @@
 from flask import jsonify, abort, request
 from models import storage
 from api.v1.views import app_views
-from models.user import User
 
 
 @app_views.route('/users', strict_slashes=False,
                  methods=['GET'])
 def users_get():
     """returns a list of all the users in storage db"""
+    from models.user import User
     users = storage.all(User).values()
     users_list = [user.to_dict() for user in users]
     return jsonify(users_list)
@@ -20,6 +20,7 @@ def users_get():
                  methods=['GET'])
 def user_get(user_id):
     """gets a user from storage based on the users id"""
+    from models.user import User
     key = f'User.{user_id}'
     user_obj = storage.all(User).get(key)
     if user_obj is None:
@@ -31,6 +32,7 @@ def user_get(user_id):
                  methods=['DELETE'])
 def user_delete(user_id):
     """deletes a given user based on the id part of the url"""
+    from models.user import User
     key = f'User.{user_id}'
     user_obj = storage.all(User).get(key)
     if user_obj is None:
@@ -44,6 +46,7 @@ def user_delete(user_id):
                  methods=['POST'])
 def user_post():
     """adds a new user to storage making sure all constraints met"""
+    from models.user import User
     if not request.get_json():
         abort(400, 'Not a JSON')
     if request.get_json().get('email') is None:
@@ -62,6 +65,7 @@ def user_post():
                  methods=['PUT'])
 def user_put(user_id):
     """updates a given user based on the id of the url part"""
+    from models.user import User
     key = f'User.{user_id}'
     user_obj = storage.all(User).get(key)
     if user_obj is None:
