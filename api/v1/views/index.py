@@ -6,6 +6,7 @@ from models import storage
 from flask import jsonify
 
 
+# the function that handles the status route /status
 @app_views.route('/status', strict_slashes=False,
                  methods=['GET'])
 def status():
@@ -16,6 +17,7 @@ def status():
     return jsonify(dict), 200
 
 
+# the function that handles the api/v1/stats route
 @app_views.route('/stats', strict_slashes=False,
                  methods=['GET'])
 def count():
