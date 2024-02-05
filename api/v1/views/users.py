@@ -2,9 +2,9 @@
 """module that contains all the routes related to users which gets
     data about a user"""
 from flask import jsonify, abort, request
+from models import storage
 from api.v1.views import app_views
 from models.user import User
-from models import storage
 
 
 @app_views.route('/users', strict_slashes=False,
