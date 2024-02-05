@@ -10,7 +10,7 @@ from models.user import User
 @app_views.route('/users', strict_slashes=False,
                  methods=['GET'])
 def users_get():
-    """returns a list of all the users in storage"""
+    """returns a list of all the users in storage db"""
     users = storage.all(User).values()
     users_list = [user.to_dict() for user in users]
     return jsonify(users_list)
@@ -30,7 +30,7 @@ def user_get(user_id):
 @app_views.route('/users/<user_id>', strict_slashes=False,
                  methods=['DELETE'])
 def user_delete(user_id):
-    """deletes a given user based on the id"""
+    """deletes a given user based on the id part of the url"""
     key = f'User.{user_id}'
     user_obj = storage.all(User).get(key)
     if user_obj is None:
@@ -43,7 +43,7 @@ def user_delete(user_id):
 @app_views.route('/users', strict_slashes=False,
                  methods=['POST'])
 def user_post():
-    """adds a new user to storage"""
+    """adds a new user to storage making sure all constraints met"""
     if not request.get_json():
         abort(400, 'Not a JSON')
     if request.get_json().get('email') is None:
@@ -61,7 +61,7 @@ def user_post():
 @app_views.route('/users/<user_id>', strict_slashes=False,
                  methods=['PUT'])
 def user_put(user_id):
-    """updates a given user based on the id"""
+    """updates a given user based on the id of the url part"""
     key = f'User.{user_id}'
     user_obj = storage.all(User).get(key)
     if user_obj is None:
