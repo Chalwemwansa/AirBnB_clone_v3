@@ -1,17 +1,20 @@
 #!/usr/bin/python3
 """this script contains the first route to the api"""
 from flask import Flask, jsonify
-app = Flask(__name__)
 from models import storage
 from api.v1.views import app_views
 from os import getenv
+from flask_cors import CORS
+app = Flask(__name__)
 app.register_blueprint(app_views)
+CORS(app, resources={r"/api/*": {"origins": '0.0.0.0'}})
 
 
 @app.teardown_appcontext
 def reload(exception):
     """reloads all objects from the db"""
     storage.close()
+
 
 @app.errorhandler(404)
 def err_handler(error):
@@ -20,6 +23,7 @@ def err_handler(error):
     res = {}
     res['error'] = 'Not found'
     return jsonify(res), 404
+
 
 if __name__ == "__main__":
     if getenv("HBNB_API_HOST") is None:

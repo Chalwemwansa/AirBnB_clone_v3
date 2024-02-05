@@ -12,10 +12,9 @@ from models.state import State
 def state():
     """retrieves a list of all state objects from the db"""
     state_objs = storage.all(State).values()
-    state_list = []
-    for obj in state_objs:
-        state_list.append(obj.to_dict())
+    state_list = [obj.to_dict() for obj in state_objs]
     return jsonify(state_list), 200
+
 
 @app_views.route('/states/<state_id>', strict_slashes=False,
                  methods=['GET'])
@@ -31,6 +30,7 @@ def state_id(state_id):
         abort(404)
     return jsonify(state_object.to_dict()), 200
 
+
 @app_views.route('/states/<state_id>', strict_slashes=False,
                  methods=['DELETE'])
 def delete(state_id):
@@ -43,6 +43,7 @@ def delete(state_id):
     storage.save()
     return (jsonify({}))
 
+
 @app_views.route('/states', strict_slashes=False,
                  methods=['POST'])
 def post():
@@ -54,9 +55,9 @@ def post():
     obj = State()
     for key, value in request.get_json().items():
         setattr(obj, key, value)
-    storage.new(obj)
-    storage.save()
+    obj.save()
     return (jsonify(obj.to_dict())), 201
+
 
 @app_views.route('/states/<state_id>', strict_slashes=False,
                  methods=['PUT'])
@@ -72,5 +73,5 @@ def put(state_id):
     for key, value in request.get_json().items():
         if key not in ignore_key:
             setattr(obj, key, value)
-    storage.save()
+    obj.save()
     return (jsonify(obj.to_dict())), 200

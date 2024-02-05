@@ -13,6 +13,7 @@ def status():
     dict['status'] = 'OK'
     return jsonify(dict), 200
 
+
 @app_views.route('/stats', strict_slashes=False,
                  methods=['GET'])
 def count():
