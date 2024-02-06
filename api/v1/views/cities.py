@@ -11,7 +11,7 @@ from models import storage
 def state_cities(state_id):
     """gets the cities from a given state"""
     from models.state import State
-    key = f'State.{state_id}'
+    key = 'State.{}'.format(state_id)
     state_obj = storage.all(State).get(key)
     if state_obj is None:
         abort(404)
@@ -25,7 +25,7 @@ def state_cities(state_id):
                  methods=['GET'])
 def cities(city_id):
     """retrieves a city object based on the id"""
-    key = f'City.{city_id}'
+    key = 'City.{}'.format(city_id)
     city_obj = storage.all(City).get(key)
     if city_obj is None:
         abort(404)
@@ -36,7 +36,7 @@ def cities(city_id):
                  methods=['DELETE'])
 def city_delete(city_id):
     """deletes a city object from storage"""
-    key = f'City.{city_id}'
+    key = 'City.{}'.format(city_id)
     city_obj = storage.all(City).get(key)
     if city_obj is None:
         abort(404)
@@ -50,7 +50,7 @@ def city_delete(city_id):
 def city_post(state_id):
     """adds a new city object with a given state_id"""
     from models.state import State
-    key = f'State.{state_id}'
+    key = 'State.{}'.format(state_id)
     state_obj = storage.all(State).get(key)
     if state_obj is None:
         abort(404)
@@ -71,7 +71,7 @@ def city_post(state_id):
                  methods=['PUT'])
 def city_put(city_id):
     """updates a given city objec based on the city id"""
-    key = f'City.{city_id}'
+    key = 'City.{}'.format(city_id)
     city_obj = storage.all(City).get(key)
     if city_obj is None:
         abort(404)

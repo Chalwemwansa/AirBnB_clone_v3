@@ -35,7 +35,7 @@ def state_id(state_id):
                  methods=['DELETE'])
 def delete(state_id):
     """method that deletes a state object from the db"""
-    obj_key = f'State.{state_id}'
+    obj_key = 'State.{}'.format(state_id)
     obj = storage.all(State).get(obj_key)
     if obj is None:
         abort(404)
@@ -65,7 +65,7 @@ def put(state_id):
     """updates a given states based on the id with new data"""
     if not request.get_json():
         abort(400, 'Not a JSON')
-    obj_key = f'State.{state_id}'
+    obj_key = 'State.{}'.format(state_id)
     obj = storage.all(State).get(obj_key)
     if obj is None:
         abort(404)

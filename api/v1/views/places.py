@@ -11,7 +11,7 @@ from api.v1.views import app_views
 def places_get(city_id):
     """gets a list of places linked to a given city"""
     from models.city import City
-    key = f'City.{city_id}'
+    key = 'City.{}'.format(city_id)
     city_obj = storage.all(City).get(key)
     if city_obj is None:
         abort(404)
@@ -24,7 +24,7 @@ def places_get(city_id):
                  methods=['GET'])
 def place_get(place_id):
     """gets a place object based on the place id"""
-    key = f'Place.{place_id}'
+    key = 'Place.{}'.format(place_id)
     place_obj = storage.all(Place).get(key)
     if place_obj is None:
         abort(404)
@@ -35,7 +35,7 @@ def place_get(place_id):
                  methods=['DELETE'])
 def place_delete(place_id):
     """deletes a place from storage based on the place id"""
-    key = f'Place.{place_id}'
+    key = 'Place.{}'.format(place_id)
     place_obj = storage.all(Place).get(key)
     if place_obj is None:
         abort(404)
@@ -50,7 +50,7 @@ def place_post(city_id):
     """adds a new place with a given city id"""
     from models.city import City
     from models.user import User
-    key = f'City.{city_id}'
+    key = 'City.{}'.format(city_id)
     city_obj = storage.all(City).get(key)
     if city_obj is None:
         abort(404)
@@ -58,7 +58,7 @@ def place_post(city_id):
         abort(400, 'Not a JSON')
     if request.get_json().get('user_id') is None:
         abort(400, 'Missing user_id')
-    user_key = f'User.{request.get_json().get("user_id")}'
+    user_key = 'User.{}'.format(request.get_json().get("user_id"))
     user_obj = storage.all(User).get(user_key)
     if user_obj is None:
         abort(404)
@@ -77,7 +77,7 @@ def place_post(city_id):
                  methods=['PUT'])
 def place_put(place_id):
     """updates a given place with new data based on the place id"""
-    key = f'Place.{place_id}'
+    key = 'Place.{}'.format(place_id)
     place_obj = storage.all(Place).get(key)
     if place_obj is None:
         abort(404)

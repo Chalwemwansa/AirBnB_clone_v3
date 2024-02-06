@@ -20,7 +20,7 @@ def amenities_get():
                  methods=['GET'])
 def amenity_get(amenity_id):
     """gets an amenity from storage based on the id"""
-    key = f'Amenity.{amenity_id}'
+    key = 'Amenity.{}'.format(amenity_id)
     amenity_obj = storage.all(Amenity).get(key)
     if amenity_obj is None:
         abort(404)
@@ -31,7 +31,7 @@ def amenity_get(amenity_id):
                  methods=['DELETE'])
 def amenity_delete(amenity_id):
     """ deletes an amenity based on the id"""
-    key = f'Amenity.{amenity_id}'
+    key = 'Amenity.{}'.format(amenity_id)
     amenity_obj = storage.all(Amenity).get(key)
     if amenity_obj is None:
         abort(404)
@@ -60,7 +60,7 @@ def amenity_post():
                  methods=['PUT'])
 def amenity_put(amenity_id):
     """updates an amenity object based on the amenity id"""
-    key = f'Amenity.{amenity_id}'
+    key = 'Amenity.{}'.format(amenity_id)
     amenity_obj = storage.all(Amenity).get(key)
     if amenity_obj is None:
         abort(404)

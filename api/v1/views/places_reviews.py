@@ -11,7 +11,7 @@ from api.v1.views import app_views
 def reviews_get(place_id):
     """gets all the reviews of a place"""
     from models.place import Place
-    key = f'Place.{place_id}'
+    key = 'Place.{}'.format(place_id)
     place_obj = storage.all(Place).get(key)
     if place_obj is None:
         abort(404)
@@ -23,7 +23,7 @@ def reviews_get(place_id):
                  methods=['GET'])
 def review_get(review_id):
     """gets a specific review based on the id"""
-    key = f'Review.{review_id}'
+    key = 'Review.{}'.format(review_id)
     review_obj = storage.all(Review).get(key)
     if review_obj is None:
         abort(404)
@@ -34,7 +34,7 @@ def review_get(review_id):
                  methods=['DELETE'])
 def review_delete(review_id):
     """deletes a review based on the review id"""
-    key = f'Review.{review_id}'
+    key = 'Review.{}'.format(review_id)
     review_obj = storage.all(Review).get(key)
     if review_obj is None:
         abort(404)
@@ -49,7 +49,7 @@ def review_post(place_id):
     """creates a new review on a given place using the place id"""
     from models.place import Place
     from models.user import User
-    place_key = f'Place.{place_id}'
+    place_key = 'Place.{}'.format(place_id)
     place_obj = storage.all(Place).get(place_key)
     if place_obj is None:
         abort(404)
@@ -57,7 +57,7 @@ def review_post(place_id):
         abort(400, 'Not a JSON')
     if request.get_json().get('user_id') is None:
         abort(400, 'Missing user_id')
-    user_key = f'User.{request.get_json().get("user_id")}'
+    user_key = 'User.{}'.format(request.get_json().get("user_id"))
     user_obj = storage.all(User).get(user_key)
     if user_obj is None:
         abort(404)
@@ -76,7 +76,7 @@ def review_post(place_id):
                  methods=['PUT'])
 def review_put(review_id):
     """updates a given review based on its id"""
-    key = f'Review.{review_id}'
+    key = 'Review.{}'.format(review_id)
     review_obj = storage.all(Review).get(key)
     if review_obj is None:
         abort(404)

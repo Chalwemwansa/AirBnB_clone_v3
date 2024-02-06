@@ -21,7 +21,7 @@ def users_get():
 def user_get(user_id):
     """gets a user from storage based on the users id"""
     from models.user import User
-    key = f'User.{user_id}'
+    key = 'User.{}'.format(user_id)
     user_obj = storage.all(User).get(key)
     if user_obj is None:
         abort(404)
@@ -33,7 +33,7 @@ def user_get(user_id):
 def user_delete(user_id):
     """deletes a given user based on the id part of the url"""
     from models.user import User
-    key = f'User.{user_id}'
+    key = 'User.{}'.format(user_id)
     user_obj = storage.all(User).get(key)
     if user_obj is None:
         abort(404)
@@ -66,7 +66,7 @@ def user_post():
 def user_put(user_id):
     """updates a given user based on the id of the url part"""
     from models.user import User
-    key = f'User.{user_id}'
+    key = 'User.{}'.format(user_id)
     user_obj = storage.all(User).get(key)
     if user_obj is None:
         abort(404)
